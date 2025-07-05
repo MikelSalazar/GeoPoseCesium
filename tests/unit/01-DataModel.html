@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"/>
+		<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon"> 
+		<title>Unit Test: Data Model</title>
+		<style>
+* { margin:0; box-sizing: border-box; }
+html, body { width:100%; height:100%; background: #222; color: white; 
+		overflow: hidden;font-family:Verdana, Tahoma, sans-serif;
+}
+body {display: flex; flex-direction: column;}
+h1, h2 { flex: 0; white-space: nowrap;}
+#list { flex: 1;}
+		</style>
+	</head>
+	<body>
+		<script type="importmap">
+{ 
+	"imports": { 
+		"modules/": "../../builds/modules/"
+	} 
+}
+		</script>
+		<script type="module">
+
+
+// ----------------------------------------------------------- TEST ENVIRONMENT
+
+import { TestEnvironment, TestGroup, Test } from "../js/TestEnvironment.js"
+import { TestControls } from "../js/TestControls.js"
+import { TestConsole } from "../js/TestConsole.js"
+
+// Create the test environment
+let testEnvironment = new TestEnvironment();
+let testControls = new TestControls({ 
+	explanation: 'Testing the different elements of the Data Model'
+});
+let testConsole = new TestConsole();
+
+// -------------------------------------------------------------------- IMPORTS
+
+import { GeoPosition } from "modules/data/components/GeoPosition.js";
+import { AngularRotation } from "modules/data/components/AngularRotation.js";
+import { QuaternionRotation } from "modules/data/components/QuaternionRotation.js";
+import { TemporalContext } from "modules/data/components/TemporalContext.js";
+import { Uncertainty } from "modules/data/components/Uncertainty.js";
+import { GeoPoseBasicYPR } from "modules/data/GeoPoseBasicYPR.js";
+import { GeoPoseBasicQuaternion } from "modules/data/GeoPoseBasicQuaternion.js";
+
+
+// ---------------------------------------------------------------------- TESTS
+
+let componentTests = new TestGroup("Components", testEnvironment, true);
+
+new Test("GeoPosition", componentTests, () => { 
+	return new GeoPosition();
+});
+
+new Test("GeoPosition with data: ({lat:1, lon:2, h:3})", componentTests, () => { 
+	return new GeoPosition({lat:1, lon:2, h:3});
+});
+
+new Test("AngularRotation", componentTests, () => { 
+	return new AngularRotation();
+});
+
+new Test("AngularRotation with data: ({yaw:1, pitch:2, roll:3})", componentTests, () => { 
+	return new AngularRotation({yaw:1, pitch:2, roll:3});
+});
+
+new Test("QuaternionRotation", componentTests, () => { 
+	return new QuaternionRotation();
+});
+
+new Test("QuaternionRotation with invalid data: ({x:1, y:2, z:3, w:4})", componentTests, () => { 
+	return new QuaternionRotation({x:1, y:2, z:3, w:4});
+}, 'ERROR');
+
+new Test("QuaternionRotation with valid data: ({x:0, y:0, z:0, w:1})", componentTests, () => { 
+	return new QuaternionRotation({x:0, y:0, z:0, w:1});
+});
+
+new Test("TemporalContext", componentTests, () => { 
+	return new TemporalContext();
+});
+
+new Test("TemporalContext with a value: (13213)", componentTests, () => { 
+	return new TemporalContext(13213);
+});
+
+new Test("TemporalContext with data: ({timestamp: 12345, duration: 2})", componentTests, () => { 
+	return new TemporalContext({timestamp: 12345, duration: 2});
+});
+
+new Test("Uncertainty", componentTests, () => { 
+	return new Uncertainty();
+});
+
+new Test("Uncertainty with a value: (3.5)", componentTests, () => { 
+	return new Uncertainty(3.5);
+});
+
+new Test("Uncertainty with data: ({h: 1, v: 2})", componentTests, () => { 
+	return new Uncertainty({h: 1, v: 2});
+});
+
+// ---------------------------------------------------------------------- TESTS
+
+let geoPoseTests = new TestGroup("GeoPoses", testEnvironment, true);
+
+new Test("GeoPoseBasicYPR without data", geoPoseTests, () => { 
+	return new GeoPoseBasicYPR();
+});
+
+new Test("GeoPoseBasicYPR with incomplete data", geoPoseTests, () => { 
+	return new GeoPoseBasicYPR({ location:{lat: 1, lon: 2, h: 3}});
+}, "ERROR");
+
+new Test("GeoPoseBasicYPR with necessary data", geoPoseTests, () => { 
+	return new GeoPoseBasicYPR({ 
+		location: { lat: 1, lon: 2, h: 3 },
+		angles: { yaw: 1, pitch: 2, roll: 3 }
+	});
+});
+
+new Test("GeoPoseBasicYPR with time data", geoPoseTests, () => { 
+	return new GeoPoseBasicYPR({ 
+		location: { lat: 1, lon: 2, h: 3 },
+		angles: { yaw: 1, pitch: 2, roll: 3 },
+		time: { duration: 1},
+	});
+});
+
+new Test("GeoPoseBasicYPR with uncertainty data", geoPoseTests, () => { 
+	return new GeoPoseBasicYPR({ 
+		location: { lat: 1, lon: 2, h: 3 },
+		angles: { yaw: 1, pitch: 2, roll: 3 },
+		uncertainty: 2,
+	});
+});
+
+new Test("GeoPoseBasicYPR with invalid component name", geoPoseTests, () => { 
+	return new GeoPoseBasicYPR({ 
+		location: { lat: 1, lon: 2, h: 3 },
+		angles: { yaw: 1, pitch: 2, roll: 3 },
+		invalidComponentName: ""
+	});
+}, "ERROR");
+
+
+
+new Test("GeoPoseBasicQuaternion", geoPoseTests, () => { 
+	return new GeoPoseBasicQuaternion();
+});
+
+
+// ---------------------------------------------------------------- ENTRY POINT
+
+// Run the tests
+testEnvironment.start();
+
+		</script>
+	</body>
+</html>

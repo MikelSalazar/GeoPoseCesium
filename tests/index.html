@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset='utf-8'>
+	<title>GeoPose-Cesium</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon"> 
+	<style> 
+* { margin:0; box-sizing: border-box;}
+html, body { width:100%; height:100%; font-family: Verdana; 
+	background: #222; color: white; }
+a {color: white; text-decoration: none;}
+body { display: flex; flex-direction: row; }
+h3 { margin: 2vmin 1vmin 1vmin 1vmin;}
+nav { height:100%; white-space: nowrap; padding: 2vmin; border-right: 1px solid black;}
+iframe { height:100%; flex-grow: 1; background: black; color: white; border: none; }
+::webkit-scrollbar-button { 
+     display:none;
+    }
+</style>
+</head>
+<body>
+	<nav>
+		<h1>GeoPose-Cesium</h1>
+		<h3>Unit Tests</h3>
+		<ol id="UnitTests"></ol>
+		<h3>Functional Tests</h3>
+		<ol id="FunctionalTests"></ol>
+	</nav>
+	<iframe name="frame"></iframe>
+	<script>
+let unitTests = {
+	"Data Model": "DataModel"
+};
+
+let functionalTests = {
+	"Initialization": "Initialization",
+	"Scene Management": "SceneManagement",
+};
+
+function createElements (parent, items, folder) {
+	parent = document.getElementById(parent);
+	let testIndex = 1;
+	for (let item in items) {
+		let element = document.createElement('li'), link = folder + '/' +
+			testIndex.toString().padStart(2, '0') + '-' + items[item] + '.html';
+		element.innerHTML = '<a href="' + link +'" target="frame">' + item + 
+		'</a> <a href="' + link +'">&#10697;</a>';
+		parent.append(element);
+		testIndex++;
+	}
+}
+
+createElements('UnitTests', unitTests, 'unit');
+createElements('FunctionalTests', functionalTests, 'functional');
+
+
+	</script>
+</body>
+</html>

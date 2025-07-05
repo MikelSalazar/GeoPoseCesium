@@ -1,0 +1,35 @@
+{
+  "name": "geopose-cesium",
+  "version": "0.1.0",
+  "description": "A GeoPose implementation for Cesium JS",
+  "author": "Mikel Salazar",
+	"license": "MIT",
+  "type": "module",
+  "directories": {
+    "bin": "builds",
+    "doc": "docs",
+    "test": "tests"
+	},
+  "scripts": {
+		"dev": "npm run build",
+		"build": "node utilities/build.js",
+		"test": "electron utilities/test.js",
+		"clean": "node utilities/clean.js",
+		"build-watch": "tsc -w"
+	},
+  "keywords": [
+    "GeoPose",
+    "Cesium"
+  ],
+  "dependencies": {
+    "cesium": "^1.130.0"
+  },
+	"bugs": {
+		"url": "https://github.com/MikelSalazar/GeoPose-Cesium/issues"
+	},
+	"homepage": "https://github.com/MikelSalazar/GeoPose-Cesium#readme",
+  "repository": {
+		"type": "git",
+		"url": "git+https://github.com/MikelSalazar/GeoPose-Cesium.git"
+	}
+}

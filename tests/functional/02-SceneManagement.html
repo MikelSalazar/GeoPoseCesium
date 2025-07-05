@@ -1,0 +1,64 @@
+	<!DOCTYPE html>
+	<html>
+		<head>
+			<meta charset="UTF-8">
+			<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"/>
+			<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon"> 
+			<title>Test: Scene Management</title>
+			<style>
+* { margin:0; box-sizing: border-box;  }
+html, body { width:100%; height:100%; background: #222; color: white; 
+		overflow: hidden;font-family:Verdana, Tahoma, sans-serif;
+}
+body {display: flex; flex-direction: column;}
+h1, h2 { flex: 0; white-space: nowrap;}
+#list { flex: 1;}
+			</style>
+		</head>
+		<body>
+			<script type="importmap">
+{ 
+	"imports": { 
+		"modules/": "../../builds/modules/",
+		"cesium": "../../node_modules/cesium/Build/Cesium/index.js"
+	} 
+}
+		</script>
+		<script type="module">
+
+// -------------------------------------------------------------------- IMPORTS
+
+import { Ion } from 'cesium'
+import { GeoPoseCesium } from 'modules/GeoPoseCesium.js';
+
+
+Ion.defaultAccessToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJqdGkiOiJkMTIyZjg5Ni03N2RmLTRhNjgtOTYwNC0zZTA5Mjk4MDg4ZTAiLCJpZCI6MTQwNSwiaWF0IjoxNjk0NTk0MDA4fQ.7YryraQtC9YT2J5hAdd_A9mhCVMIepqS5ktWZWUEwjg' // TODO
+
+
+// ---------------------------------------------------------------- ENTRY POINT
+
+// Just initialize the main class
+new GeoPoseCesium({
+		scenes: [
+			{ 
+				camera: {
+					location: {lat: 39.956, lon: -75.154, h: 100 },
+					angles: {yaw: 205, pitch: 0}
+				},
+				entities: [
+					{
+						model: '../models/icon.glb',
+						scale: 50,
+						pose: {
+							location: {lat: 39.9516, lon: -75.1604, h: 120 },
+							angles: {yaw: 0, pitch: 0}
+						}
+					}
+				]
+			}
+		]
+	});
+
+		</script>
+	</body>
+</html>

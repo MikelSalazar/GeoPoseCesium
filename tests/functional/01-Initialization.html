@@ -1,0 +1,42 @@
+	<!DOCTYPE html>
+	<html>
+		<head>
+			<meta charset="UTF-8">
+			<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no"/>
+			<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon"> 
+			<title>Test 01: Initialization</title>
+			<style>
+* { margin:0; box-sizing: border-box;  }
+html, body { width:100%; height:100%; background: #222; color: white; 
+		overflow: hidden;font-family:Verdana, Tahoma, sans-serif;
+}
+body {display: flex; flex-direction: column;}
+h1, h2 { flex: 0; white-space: nowrap;}
+#list { flex: 1;}
+			</style>
+		</head>
+		<body>
+			<script type="importmap">
+{ 
+	"imports": { 
+		"modules/": "../../builds/modules/",
+		"cesium": "../../node_modules/cesium/Build/Cesium/index.js"
+	} 
+}
+		</script>
+		<script type="module">
+
+// -------------------------------------------------------------------- IMPORTS
+
+import { Ion } from 'cesium'
+import { GeoPoseCesium } from 'modules/GeoPoseCesium.js';
+
+
+// ---------------------------------------------------------------- ENTRY POINT
+
+// Just initialize the main class
+new GeoPoseCesium();
+
+		</script>
+	</body>
+</html>

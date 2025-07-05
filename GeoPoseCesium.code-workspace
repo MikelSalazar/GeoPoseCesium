@@ -1,0 +1,37 @@
+{
+	"folders": [ { "path": "." } ],
+	"tasks": {
+		"version": "2.0.0",
+		"tasks": [
+			{
+				"label": "Build",
+				"type": "npm",
+				"icon": {"id": "run"},
+				"script": "build",
+				"group": "build",
+			},
+			{
+				"label": "Build-Watch",
+				"icon": {"id": "clock"},
+				"type": "npm",
+				"script": "build-watch",
+				"group": "build",
+			},
+			{
+				"label": "Clean",
+				"type": "npm",
+				"script": "clean",
+				"group": "build",
+				"problemMatcher": [],
+			},
+			{
+				"label": "Test",
+				"icon": {"id": "check-all"},
+				"type": "npm",
+				"script": "test",
+				"group": "test",
+				"problemMatcher": [],
+			}
+		]
+	}
+}
