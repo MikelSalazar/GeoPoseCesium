@@ -1,0 +1,8 @@
+# GeoPose-Cesium
+
+🚧 Under Construction 🚧
+
+An implementation of [OGC GeoPose standard](https://geopose.org) for the 
+[Cesium JS library](https://cesium.com/platform/cesiumjs/).
+
+(Operating in the development branch until the initial release)
