@@ -1,4 +1,5 @@
-import { Cartesian3, CesiumWidget, createGooglePhotorealistic3DTileset, HeadingPitchRoll, Transforms} from 'cesium'
+import { Cartesian3, CesiumWidget, createGooglePhotorealistic3DTileset, 
+	HeadingPitchRoll, Transforms, IonGeocodeProviderType} from 'cesium'
 import { Scene } from './logic/Scene.js';
 
 /** Creates the main class of the Cesium implementation of OGC GeoPose. */
@@ -60,10 +61,11 @@ export class GeoPoseCesium {
 		this._widget.camera.flyTo({ 
 			destination: Cartesian3.fromDegrees(camera.location.longitude,
 				camera.location.latitude, camera.location.height),
-				orientation: HeadingPitchRoll.fromDegrees(
+			orientation: HeadingPitchRoll.fromDegrees(
 					-camera.angles.yaw + 90, // Convert Yaw (East) to heading.
 					camera.angles.pitch, camera.angles.roll
-				)
+				),
+			duration: 0
 		});
 	}
 
@@ -82,11 +84,8 @@ export class GeoPoseCesium {
 		this._frameCounter = 0; this._framesPerSecond = 0;
 
 		// Create the Cesium widget
-		this._widget = new CesiumWidget(parentElement || document.body, {
-			globe: false,
-			// geocode: 
-			// shadows: true,
-			shouldAnimate: true,
+		this._widget = new CesiumWidget(parentElement || document.body, { 
+			globe: false, // Hide the globe
 		});
 
 		// Show the sky
@@ -95,7 +94,8 @@ export class GeoPoseCesium {
 		// Load the Google Maps 3D Tiles
 		async function addGoogleTiles(viewer: CesiumWidget) {
 			try {
-				const tileset = await createGooglePhotorealistic3DTileset();
+				const tileset = await createGooglePhotorealistic3DTileset({
+					onlyUsingWithGoogleGeocoder: true}); //
 				viewer.scene.primitives.add(tileset);
 			} catch (error) {
 				console.log(`Failed to load tileset: ${error}`);

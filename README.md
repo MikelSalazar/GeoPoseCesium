@@ -15,7 +15,7 @@ command in the project root folder to install the project dependencies
 (including the [Cesium JS library](https://www.npmjs.com/package/cesium) 
 and the associated TypeScript declarations).
 
-    npm install
+    npm install cesium
 
 
 ## Building

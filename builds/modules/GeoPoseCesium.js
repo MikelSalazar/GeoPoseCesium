@@ -15,7 +15,8 @@ export class GeoPoseCesium {
         let scene = this._scenes[newScene], camera = scene.camera;
         this._widget.camera.flyTo({
             destination: Cartesian3.fromDegrees(camera.location.longitude, camera.location.latitude, camera.location.height),
-            orientation: HeadingPitchRoll.fromDegrees(-camera.angles.yaw + 90, camera.angles.pitch, camera.angles.roll)
+            orientation: HeadingPitchRoll.fromDegrees(-camera.angles.yaw + 90, camera.angles.pitch, camera.angles.roll),
+            duration: 0
         });
     }
     constructor(data, parentElement) {
@@ -30,12 +31,13 @@ export class GeoPoseCesium {
         this._framesPerSecond = 0;
         this._widget = new CesiumWidget(parentElement || document.body, {
             globe: false,
-            shouldAnimate: true,
         });
         this._widget.scene.skyAtmosphere.show = true;
         async function addGoogleTiles(viewer) {
             try {
-                const tileset = await createGooglePhotorealistic3DTileset();
+                const tileset = await createGooglePhotorealistic3DTileset({
+                    onlyUsingWithGoogleGeocoder: true
+                });
                 viewer.scene.primitives.add(tileset);
             }
             catch (error) {
