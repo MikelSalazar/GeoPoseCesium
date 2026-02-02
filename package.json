@@ -22,7 +22,8 @@
     "Cesium"
   ],
   "dependencies": {
-    "cesium": "^1.131.0"
+    "cesium": "^1.131.0",
+    "npm": "^11.4.2"
   },
   "bugs": {
     "url": "https://github.com/MikelSalazar/GeoPose-Cesium/issues"

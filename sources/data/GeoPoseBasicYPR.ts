@@ -34,7 +34,7 @@ export class GeoPoseBasicYPR extends GeoPose {
 	// ------------------------------------------------------------ CONSTRUCTOR
 
 	/** Initializes a new instance of the GeoPoseBasicYPR class.
-	 * @param data The data of the instance. */
+	 * @param data The initialization data of the instance. */
 	constructor(data?: any) {
 
 		// Call the base class constructor
